@@ -15,4 +15,6 @@ index=_internal host IN (*adhoc-sh*) | dedup host | table host | outputlookup ad
 
 4.) setup email address to send alert to
 
+5.) Sit back and wait for your alerts to roll in
+
 
