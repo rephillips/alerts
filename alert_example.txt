@@ -4,14 +4,15 @@ if you want to create an alert to trigger when a host has stopped writing to met
 index=_internal host IN (*adhoc-sh*) | dedup host | table host | outputlookup adhoc_sh_hosts.csv
 
 2.) create alert:
-| tstats count where [ | inputlookup adhoc_sh_hosts.csv ],index=_internal sourcetype=splunkd source=*/metrics.log by host
+| tstats count where [ | inputlookup adhoc_sh_hosts.csv ]
+index=_internal sourcetype=splunkd source=*/metrics.log by host
 | append [
   | inputlookup adhoc_sh_hosts.csv
   | eval count=0
 ]
 | stats max(count) as count by host | search count = 0
 
-3.) Create trigger condition when Number of results is greater than 0
+3.) Create trigger condition when Number of results equals 0
 
 4.) setup email address to send alert to
 
